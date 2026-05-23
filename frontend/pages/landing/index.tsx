@@ -87,7 +87,9 @@ const ProfileSidebar = () => {
     >
       <div
         style={{
-          background: "linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)",
+          background: user?.bannerImage
+            ? `linear-gradient(rgba(2, 132, 199, 0.12), rgba(2, 132, 199, 0.12)), url(${user.bannerImage}) center/cover`
+            : "linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)",
           height: 120,
           borderRadius: 12,
           position: "relative",
@@ -97,19 +99,21 @@ const ProfileSidebar = () => {
           justifyContent: "center",
         }}
       >
-        <div
-          style={{
-            width: 60,
-            height: 60,
-            backgroundColor: "rgba(255,255,255,0.2)",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Heart size={30} color="white" />
-        </div>
+        {!user?.bannerImage && (
+          <div
+            style={{
+              width: 60,
+              height: 60,
+              backgroundColor: "rgba(255,255,255,0.2)",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Heart size={30} color="white" />
+          </div>
+        )}
       </div>
       <div
         style={{
@@ -1389,6 +1393,7 @@ type Doctor = {
   allergies?: string[];
   mentorDoctor?: string;
   profilePicture?: string;
+  bannerImage?: string;
   createdAt?: string;
 };
 
