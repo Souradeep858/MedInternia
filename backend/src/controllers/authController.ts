@@ -196,12 +196,16 @@ export const sendOtp = asyncHandler(async (req: Request, res: Response) => {
     }
   });
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: 'MedInternia Email Verification OTP',
-    text: `Your OTP is: ${otp}`
-  });
+  try {
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'MedInternia Email Verification OTP',
+      text: `Your OTP is: ${otp}`
+    });
+  } catch (error) {
+    throw new AppError('Failed to send OTP email. Please try again later.', 500);
+  }
 
   return res.json({ success: true });
 });
@@ -372,12 +376,16 @@ export const forgotPassword = asyncHandler(async (req: Request, res: Response) =
     }
   });
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: 'MedInternia Password Reset OTP',
-    text: `Your password reset OTP is: ${otp}`
-  });
+  try {
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'MedInternia Password Reset OTP',
+      text: `Your password reset OTP is: ${otp}`
+    });
+  } catch (error) {
+    throw new AppError('Failed to send password reset email. Please try again later.', 500);
+  }
 
   return res.json({ success: true });
 });
