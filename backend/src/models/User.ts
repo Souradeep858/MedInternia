@@ -39,6 +39,7 @@ export interface IUser extends Document {
   githubProfile?: string;
   bio?: string;
   profilePicture?: string;
+  bannerImage?: string;
   // Doctor specific fields
   specialization?: string;
   licenseNumber?: string;
@@ -212,6 +213,11 @@ const UserSchema = new Schema<IUser>({
     type: String,
     match: [/^https?:\/\/.+/, 'Please provide a valid profile picture URL']
   },
+  bannerImage: {
+    type: String,
+    // Allow empty string for banner removal; otherwise require an http(s) URL
+    match: [/^(https?:\/\/.+)?$/, 'Please provide a valid banner image URL']
+  }
   // Doctor specific fields
   specialization: {
     type: String,

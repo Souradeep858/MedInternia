@@ -96,7 +96,9 @@ export default function PeoplePage() {
             {/* ...profile section code... */}
             <div
               style={{
-                background: "linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)",
+                background: profile?.bannerImage
+                  ? `linear-gradient(rgba(2, 132, 199, 0.12), rgba(2, 132, 199, 0.12)), url(${profile.bannerImage}) center/cover`
+                  : "linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)",
                 height: 120,
                 borderRadius: 12,
                 position: "relative",
@@ -106,25 +108,27 @@ export default function PeoplePage() {
                 justifyContent: "center",
               }}
             >
-              <div
-                style={{
-                  width: 60,
-                  height: 60,
-                  backgroundColor: "rgba(255,255,255,0.2)",
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <span
-                  role="img"
-                  aria-label="heart"
-                  style={{ fontSize: 45, color: "white" }}
+              {!profile?.bannerImage && (
+                <div
+                  style={{
+                    width: 60,
+                    height: 60,
+                    backgroundColor: "rgba(255,255,255,0.2)",
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
-                  🥼
-                </span>
-              </div>
+                  <span
+                    role="img"
+                    aria-label="coat"
+                    style={{ fontSize: 45, color: "white" }}
+                  >
+                    🥼
+                  </span>
+                </div>
+              )}
             </div>
             <div
               style={{
